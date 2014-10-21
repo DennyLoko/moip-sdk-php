@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Documentação SDK</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["php"]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="php">php</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://moip.com.br/docs/'>Documentação da API</a></li>
+            <li><a href='https://moip.com.br/forum'>Fórum</a></li>
+            <li><a href='https://desenvolvedor.moip.com.br/sandbox/cadastro/integracao/3434373731333435353133353330393639'>Cadastro Sandbox</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='moipmoip'>Moip\Moip</h1>
+<p>O participante <code class="prettyprint">Moip\Moip</code> é o ponto de entrada do SDK. É um Façade que além de permitir um ponto central de configuração, ainda permite o acesso aos outros participantes.</p>
+<pre class="highlight php"><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Moip\Moip</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Moip\MoipBasicAuth</span><span class="p">;</span>
+
+<span class="nv">$token</span> <span class="o">=</span> <span class="s1">'0ERVDN386WE3RZRI4YYG6QCDLMJ57LBR'</span><span class="p">;</span>
+<span class="nv">$key</span> <span class="o">=</span> <span class="s1">'SRZGHRXYOT0PVDLRB3YE8XQWLNLA0JRXTKOIDVDQ'</span><span class="p">;</span>
+
+<span class="nv">$auth</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MoipBasicAuth</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$key</span><span class="p">);</span>
+<span class="nv">$moip</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Moip</span><span class="p">(</span><span class="nv">$auth</span><span class="p">);</span>
+</pre>
+
+<blockquote>
+<p>Você pode configurar o ambiente que vai utilizar através do segundo parâmetro do construtor.</p>
+</blockquote>
+<pre class="highlight php"><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Moip\Moip</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Moip\MoipBasicAuth</span><span class="p">;</span>
+
+<span class="nv">$token</span> <span class="o">=</span> <span class="s1">'0ERVDN386WE3RZRI4YYG6QCDLMJ57LBR'</span><span class="p">;</span>
+<span class="nv">$key</span> <span class="o">=</span> <span class="s1">'SRZGHRXYOT0PVDLRB3YE8XQWLNLA0JRXTKOIDVDQ'</span><span class="p">;</span>
+
+<span class="nv">$auth</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MoipBasicAuth</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$key</span><span class="p">);</span>
+<span class="nv">$moip</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Moip</span><span class="p">(</span><span class="nv">$auth</span><span class="p">,</span> <span class="nx">Moip</span><span class="o">::</span><span class="na">SANDBOX_ENDPOINT</span><span class="p">);</span>
+</pre>
+
+<p><aside class="notice">Por padrão, é utilizado o ambiente de produção caso nenhum ambiente seja especificado.</aside></p>
+
+<table><thead>
+<tr>
+<th>Retorno</th>
+<th>Método</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Moip\Resource\Customer</code></td>
+<td><code class="prettyprint">customers()</code></td>
+<td>Cria uma nova instância do objeto <code class="prettyprint">Customer</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Moip\Resource\Entry</code></td>
+<td><code class="prettyprint">entries()</code></td>
+<td>Cria uma nova instância do objeto <code class="prettyprint">Entry</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Moip\Resource\Orders</code></td>
+<td><code class="prettyprint">orders()</code></td>
+<td>Cria uma nova instância do objeto <code class="prettyprint">Orders</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Moip\Resource\Payment</code></td>
+<td><code class="prettyprint">payments()</code></td>
+<td>Cria uma nova instância do objeto <code class="prettyprint">Payment</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Moip\Resource\Multiorders</code></td>
+<td><code class="prettyprint">multiorders()</code></td>
+<td>Cria uma nova instância do objeto <code class="prettyprint">Multiorders</code>.</td>
+</tr>
+</tbody></table>
+<h1 id='moipresourceorders'>Moip\Resource\Orders</h1>
+<p>Um Pagamento é representado, criado ou consultado através do participante <code class="prettyprint">self</code>. A tabela abaixo descreve sua interface e parâmetros:</p>
+
+<blockquote>
+<p>O SDK possui uma interface fluente, que permite que seus métodos sejam encadeados segundo seu contexto.</p>
+</blockquote>
+<pre class="highlight php"><span class="cp">&lt;?php</span>
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Moip\Moip</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Moip\MoipBasicAuth</span><span class="p">;</span>
+
+<span class="nv">$endpoint</span> <span class="o">=</span> <span class="s1">'private-31ec8-moip.apiary-mock.com'</span><span class="p">;</span>
+<span class="nv">$token</span> <span class="o">=</span> <span class="s1">'0ERVDN386WE3RZRI4YYG6QCDLMJ57LBR'</span><span class="p">;</span>
+<span class="nv">$key</span> <span class="o">=</span> <span class="s1">'SRZGHRXYOT0PVDLRB3YE8XQWLNLA0JRXTKOIDVDQ'</span><span class="p">;</span>
+
+<span class="nv">$moip</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Moip</span><span class="p">(</span><span class="k">new</span> <span class="nx">MoipBasicAuth</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$key</span><span class="p">),</span> <span class="nv">$endpoint</span><span class="p">);</span>
+
+<span class="nv">$order</span> <span class="o">=</span> <span class="nv">$moip</span><span class="o">-&gt;</span><span class="na">orders</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setOwnId</span><span class="p">(</span><span class="s1">'sandbox_v2_1401147277'</span><span class="p">)</span>
+                        <span class="o">-&gt;</span><span class="na">addItem</span><span class="p">(</span><span class="s1">'Pedido de testes Sandbox - 1401147277'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'Mais info...'</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+                        <span class="o">-&gt;</span><span class="na">setShippingAmount</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+                        <span class="o">-&gt;</span><span class="na">setCustomer</span><span class="p">(</span><span class="nv">$moip</span><span class="o">-&gt;</span><span class="na">customers</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setOwnId</span><span class="p">(</span><span class="s1">'sandbox_v2_1401147277'</span><span class="p">)</span>
+                                                        <span class="o">-&gt;</span><span class="na">setFullname</span><span class="p">(</span><span class="s1">'Jose Silva'</span><span class="p">)</span>
+                                                        <span class="o">-&gt;</span><span class="na">setEmail</span><span class="p">(</span><span class="s1">'sandbox_v2_1401147277@email.com'</span><span class="p">)</span>
+                                                        <span class="o">-&gt;</span><span class="na">setBirthDate</span><span class="p">(</span><span class="s1">'1988-12-30'</span><span class="p">)</span>
+                                                        <span class="o">-&gt;</span><span class="na">setTaxDocument</span><span class="p">(</span><span class="s1">'33333333333'</span><span class="p">)</span>
+                                                        <span class="o">-&gt;</span><span class="na">setPhone</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">66778899</span><span class="p">)</span>
+                                                        <span class="o">-&gt;</span><span class="na">addAddress</span><span class="p">(</span><span class="s1">'BILLING'</span><span class="p">,</span>
+                                                                     <span class="s1">'Avenida Faria Lima'</span><span class="p">,</span> <span class="mi">2927</span><span class="p">,</span>
+                                                                     <span class="s1">'Itaim'</span><span class="p">,</span> <span class="s1">'Sao Paulo'</span><span class="p">,</span> <span class="s1">'SP'</span><span class="p">,</span>
+                                                                     <span class="s1">'01234000'</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+                        <span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+</pre>
+
+<table><thead>
+<tr>
+<th>Retorno</th>
+<th>Método</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">self</code></td>
+<td><code class="prettyprint">addItem($product, $quantity, $detail, $price)</code></td>
+<td>Adiciona um produto ao pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">self</code></td>
+<td><code class="prettyprint">addReceiver($moipAccount, $type = &#39;PRIMARY&#39;)</code></td>
+<td>Adiciona um recebedor. Por padrão, um recebedor primário</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Moip\Resource\Orders</code></td>
+<td><code class="prettyprint">create()</code></td>
+<td>Cria um pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">self</code></td>
+<td><code class="prettyprint">get($id)</code></td>
+<td>Obtém um pedido através de seu identificador</td>
+</tr>
+<tr>
+<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">getId()</code></td>
+<td>Getter para obtenção do ID do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">getOwnId()</code></td>
+<td>Getter para obtenção do ID próprio do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">float</code></td>
+<td><code class="prettyprint">getAmountTotal()</code></td>
+<td>Getter para obtenção do valor total do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">float</code></td>
+<td><code class="prettyprint">getAmountFees()</code></td>
+<td>Getter para obtenção do valor das taxas do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">float</code></td>
+<td><code class="prettyprint">getAmountRefunds()</code></td>
+<td>Getter para obtenção do valor total de reembolsos do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">float</code></td>
+<td><code class="prettyprint">getAmountLiquid()</code></td>
+<td>Getter para obtenção do valor líquido do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">float</code></td>
+<td><code class="prettyprint">getAmountOtherReceivers()</code></td>
+<td>Getter para obtenção do valor de outros recebedores</td>
+</tr>
+<tr>
+<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">getCurrenty()</code></td>
+<td>Getter para obtenção da moeda utilizada no pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">float</code></td>
+<td><code class="prettyprint">getSubtotalShipping()</code></td>
+<td>Getter para obtenção do subtotal relacionado com despesas de entrega</td>
+</tr>
+<tr>
+<td><code class="prettyprint">float</code></td>
+<td><code class="prettyprint">getSubtotalAddition()</code></td>
+<td>Getter para obtenção do valor adicional do item</td>
+</tr>
+<tr>
+<td><code class="prettyprint">float</code></td>
+<td><code class="prettyprint">getSubtotalDiscount()</code></td>
+<td>Getter para obtenção do valor do desconto</td>
+</tr>
+<tr>
+<td><code class="prettyprint">float</code></td>
+<td><code class="prettyprint">getSubtotalItems()</code></td>
+<td>Getter para obtenção do valor dos itens</td>
+</tr>
+<tr>
+<td><code class="prettyprint">\Iterator</code></td>
+<td><code class="prettyprint">getItemIterator()</code></td>
+<td>Obtém um iterator para percorrer os itens</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Moip\Resource\Customer</code></td>
+<td><code class="prettyprint">getCustomer()</code></td>
+<td>Obtém o cliente relacionado com o pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">\Iterator</code></td>
+<td><code class="prettyprint">getPaymentIterator()</code></td>
+<td>Obtém um iterator para percorrer os pagamentos relacionados com o pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">\Iterator</code></td>
+<td><code class="prettyprint">getReceiverIterator()</code></td>
+<td>Obtém um iterator para percorrer os recebedores relacionados com o pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">\Iterator</code></td>
+<td><code class="prettyprint">getEventIterator()</code></td>
+<td>Obtém um iterator para percorrer os eventos relacionados com o pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">\Iterator</code></td>
+<td><code class="prettyprint">getRefundIterator()</code></td>
+<td>Obtém um iterator para percorrer os reembolsos relacionados com o pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">getStatus()</code></td>
+<td>Getter para obtenção do status do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">getCreatedAt()</code></td>
+<td>Getter para obtenção da data de criação do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">getUpdatedAt()</code></td>
+<td>Getter para obtenção da data de atualização do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">object</code></td>
+<td><code class="prettyprint">getLinks()</code></td>
+<td>Getter para obtenção dos links de relacionamento com outros recursos da API</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Moip\Resource\Payment</code></td>
+<td><code class="prettyprint">payments()</code></td>
+<td>Método de acesso/criação de uma instância de <code class="prettyprint">Payment</code> já configurada para esse pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Moip\Resource\Refund</code></td>
+<td><code class="prettyprint">refunds()</code></td>
+<td>Método de acesso/criação de uma instância de <code class="prettyprint">Refund</code> já configurada para esse pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">self</code></td>
+<td><code class="prettyprint">setAddition($value)</code></td>
+<td>Setter para definição do valor adicional</td>
+</tr>
+<tr>
+<td><code class="prettyprint">self</code></td>
+<td><code class="prettyprint">setCustomer(Customer $customer)</code></td>
+<td>Setter para definição do cliente do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">self</code></td>
+<td><code class="prettyprint">setDiscont($value)</code></td>
+<td>Setter para definição do desconto do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">self</code></td>
+<td><code class="prettyprint">setOwnId($ownId)</code></td>
+<td>Setter para definição do id próprio do pedido</td>
+</tr>
+<tr>
+<td><code class="prettyprint">self</code></td>
+<td><code class="prettyprint">setShippingAmount($value)</code></td>
+<td>Setter para definição do valor das despesas de entrega</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="php">php</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
