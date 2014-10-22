@@ -45,7 +45,25 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='moipmoip'>Moip\Moip</h1>
+        <h1 id='introduo'>Introdução</h1>
+<p>Esse é o kit de desenvolvimento PHP para a API Moip versão 2.0. Através desse SDK, você conseguirá iniciar sua integração e finalizá-la em poucos instantes.</p>
+<h2 id='instalao'>Instalação</h2>
+<p>O meio mais rápido e simples para instalação do SDK, é através do composer. Para isso, basta adicionar ao seu arquivo <code class="prettyprint">composer.json</code>, o seguinte:</p>
+
+<p><code class="prettyprint">{
+        &quot;require&quot; : {
+            &quot;moip/sdk-php&quot; : &quot;dev-master&quot;
+        }
+    }</code></p>
+
+<p>Uma vez configurado em seu composer.json, basta executar:</p>
+
+<p><code class="prettyprint">composer install</code></p>
+
+<p><aside class="warning">O SDK requer PHP &gt;= 5.3</aside></p>
+<h1 id='moip'>Moip</h1>
+<p>Namespace raiz do SDK.</p>
+<h2 id='moipmoip'>Moip\Moip</h2>
 <p>O participante <code class="prettyprint">Moip\Moip</code> é o ponto de entrada do SDK. É um Façade que além de permitir um ponto central de configuração, ainda permite o acesso aos outros participantes.</p>
 <pre class="highlight php"><span class="cp">&lt;?php</span>
 <span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
@@ -111,7 +129,19 @@
 <td>Cria uma nova instância do objeto <code class="prettyprint">Multiorders</code>.</td>
 </tr>
 </tbody></table>
-<h1 id='moipresourceorders'>Moip\Resource\Orders</h1>
+<h2 id='moipmoipbasicauth'>Moip\MoipBasicAuth</h2>
+<p>Representa uma autenticação HTTP Basic para o tráfego das mensagens da API. Todas as mensagens trocadas pela API precisam ser autenticadas, seja através de uma autenticação HTTP Basic, ou utilizando uma autenticação de terceiros através de OAuth.</p>
+<pre class="highlight plaintext">&lt;?php
+require 'vendor/autoload.php';
+
+use Moip\MoipBasicAuth;
+
+$token = '0ERVDN386WE3RZRI4YYG6QCDLMJ57LBR';
+$key = 'SRZGHRXYOT0PVDLRB3YE8XQWLNLA0JRXTKOIDVDQ';
+
+$auth = new MoipBasicAuth($token, $key);
+</pre>
+<h1 id='moipresources'>Moip\Resources</h1><h2 id='moipresourcesorders'>Moip\Resources\Orders</h2>
 <p>Um Pagamento é representado, criado ou consultado através do participante <code class="prettyprint">self</code>. A tabela abaixo descreve sua interface e parâmetros:</p>
 
 <blockquote>
